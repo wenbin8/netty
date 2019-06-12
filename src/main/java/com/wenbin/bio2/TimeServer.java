@@ -13,21 +13,19 @@ public class TimeServer {
 
     public static void main(String[] args) {
         int port = 8080;
-
         try {
+            // 监听端口
             ServerSocket serverSocket = new ServerSocket(port);
-
             Socket socket = null;
 
             while (true) {
                 // 没有连接接入的时候阻塞在这里等待连接.
                 socket = serverSocket.accept();
+                // 将连接交给线程处理
                 new Thread(new TimeServerHandler(socket)).start();
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
     }
 }

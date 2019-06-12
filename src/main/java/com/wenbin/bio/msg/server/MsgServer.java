@@ -21,7 +21,6 @@ public class MsgServer {
 
         try {
             serverSocket = new ServerSocket(port);
-
             System.out.println("消息接收服务端已启动,端口号:" + port);
 
             // 无限循环监听客户端连接
@@ -29,9 +28,7 @@ public class MsgServer {
                 final Socket socket = serverSocket.accept();
 
                 new MsgHandler(socket).run();
-
             }
-
         } finally {
             //一些必要的清理工作
             if (serverSocket != null) {

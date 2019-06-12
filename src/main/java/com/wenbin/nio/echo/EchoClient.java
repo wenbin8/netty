@@ -1,7 +1,6 @@
 package com.wenbin.nio.echo;
 
 import java.io.IOException;
-import java.io.PipedReader;
 import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
@@ -40,9 +39,7 @@ public class EchoClient {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
-
 
 
     public void start() {
@@ -66,7 +63,6 @@ public class EchoClient {
         }
 
         boolean isClose = false;
-
         while (!isClose) {
             isClose = select(msg);
         }
@@ -126,10 +122,8 @@ public class EchoClient {
                     } else if (readSize < 0) {
                         key.cancel();
                         socketChannel.close();
-
                     }
                 }
-
             }
             return rsp;
         } catch (IOException e) {
@@ -139,7 +133,7 @@ public class EchoClient {
     }
 
     public static void main(String[] args) {
-        EchoClient echoClient = new EchoClient("是的发送到发送到飞洒的飞洒的发大水发撒飞洒的飞洒的发送");
+        EchoClient echoClient = new EchoClient("我是要发送的信息");
         echoClient.start();
     }
 }

@@ -19,8 +19,6 @@ public class TimeServerHandlerExecutePool {
                 Runtime.getRuntime().availableProcessors()
                 , maxPoolSize, 120L, TimeUnit.SECONDS
                 , new ArrayBlockingQueue<Runnable>(queueSizee));
-
-
     }
 
     public void execute(Runnable task) {

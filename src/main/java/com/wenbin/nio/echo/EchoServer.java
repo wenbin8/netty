@@ -27,8 +27,6 @@ public class EchoServer {
 
     private Charset utf8 = Charset.forName("UTF-8");
 
-
-
     public EchoServer()  {
         try {
             selector = Selector.open();
@@ -100,8 +98,6 @@ public class EchoServer {
                     }
                 }
             }
-
-
         } catch (IOException e) {
             e.printStackTrace();
         }

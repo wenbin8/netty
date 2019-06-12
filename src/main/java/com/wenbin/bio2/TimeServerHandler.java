@@ -26,7 +26,9 @@ public class TimeServerHandler implements Runnable {
         PrintWriter out = null;
 
         try {
+            // 从socket中获得输入流
             in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            // 从socket中获得输出流
             out = new PrintWriter(socket.getOutputStream(), true);
 
             String currentTime = null;
@@ -36,7 +38,7 @@ public class TimeServerHandler implements Runnable {
 
                 currentTime = "QUERY TIME ORDER".equalsIgnoreCase(body)
                         ? new Date(System.currentTimeMillis()).toString() : "BAD ORDER";
-
+                // 将相应消息写到输出流中
                 out.println(currentTime);
             }
         } catch (IOException e) {

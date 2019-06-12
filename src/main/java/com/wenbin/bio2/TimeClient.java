@@ -17,19 +17,22 @@ public class TimeClient {
         int port = 8080;
 
         try {
+            // 连接
             Socket socket = new Socket("127.0.0.1", port);
 
+            // 从socket中获得输入流
             BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            // 从socket中获得输出流
             PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
 
+            // 把消息写入输出流
             out.println("QUERY TIME ORDER");
             System.out.println("Send order 2 server succeed.");
+            // 从输入流读取消息,因为都是英文不涉及enCode deCode
             String resp = in.readLine();
             System.out.println("Now is :" + resp);
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
     }
 }
