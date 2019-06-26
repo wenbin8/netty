@@ -26,11 +26,21 @@ public class EchoClient {
         this.port = port;
     }
 
+    public static void main(String[] args)
+            throws Exception {
+
+        final String host = "127.0.0.1";
+        final int port = 8090;
+        new EchoClient(host, port).start();
+    }
+
     public void start() throws InterruptedException {
         EventLoopGroup group = new NioEventLoopGroup();
 
         try {
             Bootstrap bootstrap = new Bootstrap();
+//            OioSocketChannel  BIO
+
             bootstrap.group(group)
                     .channel(NioSocketChannel.class)
                     .remoteAddress(new InetSocketAddress(host, port))
@@ -46,13 +56,5 @@ public class EchoClient {
         } finally {
             group.shutdownGracefully().sync();
         }
-    }
-
-    public static void main(String[] args)
-            throws Exception {
-
-        final String host = "127.0.0.1";
-        final int port = 8090;
-        new EchoClient(host, port).start();
     }
 }

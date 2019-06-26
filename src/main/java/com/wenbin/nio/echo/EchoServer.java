@@ -51,7 +51,7 @@ public class EchoServer {
                 it.remove();
 
                 if (key.isAcceptable()) {
-                    System.out.println("接到连接");
+//                    System.out.println("接到连接");
                     // 获得连接通道
                     ServerSocketChannel serverSocketChannel = (ServerSocketChannel)key.channel();
                     SocketChannel socketChannel = serverSocketChannel.accept();
@@ -60,14 +60,14 @@ public class EchoServer {
                     int register = SelectionKey.OP_READ;
 //                    int register = SelectionKey.OP_READ | SelectionKey.OP_WRITE;
                     socketChannel.register(selector, register);
-                    System.out.println("连接读注册成功");
+//                    System.out.println("连接读注册成功");
                 }
 
                 if (key.isReadable()) {
-                    System.out.println("接到读事件");
+//                    System.out.println("接到读事件");
                     SocketChannel socketChannel = (SocketChannel) key.channel();
 
-                    ByteBuffer readBuffer = ByteBuffer.allocate(1024);
+                    ByteBuffer readBuffer = ByteBuffer.allocate(4);
                     int readSize = socketChannel.read(readBuffer);
 
                     if (readSize > 0) {
@@ -87,10 +87,10 @@ public class EchoServer {
                          * 写事件何时触发?
                          *
                          * 写就绪相对有一点特殊，一般来说，你不应该注册写事件。写操作的就绪条件为底层缓冲区有空闲空间，
-                         * 而写缓冲区绝大部分时间都是有空闲空间的，所以当你注册写事件后，写操作一直是就绪的，选择处理
+                         * 而写缓冲区绝大部分时间都是有空闲空间的，所以当你注册写事件后，写操作一直是就绪的，选择器处理
                          * 线程全占用整个CPU资源。所以，只有当你确实有数据要写时再注册写操作，并在写完以后马上取消注册。
                          */
-                        System.out.println("读事件处理成功");
+//                        System.out.println("读事件处理成功");
                     } else if (readSize < 0) {
                         // 读取到小于0对方链路关闭
                         key.cancel();

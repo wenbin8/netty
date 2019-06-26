@@ -22,6 +22,11 @@ public class EchoServer {
         this.port = port;
     }
 
+    public static void main(String[] args)
+            throws Exception {
+        int port = 8090;
+        new EchoServer(port).start();
+    }
 
     public void start() throws InterruptedException {
         final EchoServerHandler serverHandler = new EchoServerHandler();
@@ -30,6 +35,7 @@ public class EchoServer {
 
         try {
             ServerBootstrap serverBootstrap = new ServerBootstrap();
+            // OioServerSocketChannel BIO
             serverBootstrap.group(group)
                     .channel(NioServerSocketChannel.class)
                     .localAddress(new InetSocketAddress(port))
@@ -44,11 +50,5 @@ public class EchoServer {
         } finally {
             group.shutdownGracefully().sync();
         }
-    }
-
-    public static void main(String[] args)
-            throws Exception {
-        int port = 8090;
-        new EchoServer(port).start();
     }
 }
