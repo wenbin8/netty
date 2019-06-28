@@ -24,6 +24,8 @@ public class ReadCompletionHandler implements CompletionHandler<Integer, ByteBuf
 
     @Override
     public void completed(Integer result, ByteBuffer attachment) {
+        System.out.println("Read Thread:" + Thread.currentThread().getName());
+
         attachment.flip();
         byte[] body = new byte[attachment.remaining()];
         attachment.get(body);
@@ -41,6 +43,8 @@ public class ReadCompletionHandler implements CompletionHandler<Integer, ByteBuf
     }
 
     private void doWrite(String currentTime) {
+        System.out.println("Write Thread:" + Thread.currentThread().getName());
+
         if (currentTime != null && currentTime.trim().length() > 0) {
             byte[] bytes = (currentTime).getBytes();
             ByteBuffer writeBuffer = ByteBuffer.allocate(bytes.length);

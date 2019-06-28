@@ -18,6 +18,7 @@ public class Client {
         socketChannel = SocketChannel.open();
 //        socketChannel.configureBlocking(false);
         socketChannel.connect(new InetSocketAddress("localhost", 1234));
+
         Date now = new Date();
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");//可以方便地修改日期格式
         String str = dateFormat.format(now);

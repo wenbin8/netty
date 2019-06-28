@@ -14,7 +14,11 @@ public class AcceptCompletionHandler
 
     @Override
     public void completed(AsynchronousSocketChannel result, AsyncTimeServerHandler attachment) {
-        // 次accept只能与一个客户端通信，并且处理接收请求的线程最后都被标记为interrupted。所以每次accept方法要重新注册使用。
+
+        System.out.println("Accept Thread:" + Thread.currentThread().getName());
+
+        // 次accept只能与一个客户端通信，并且处理接收请求的线程最后都被标记为interrupted。
+        // 所以每次accept方法要重新注册使用。
         attachment.asynchronousServerSocketChannel.accept(attachment, this);
         ByteBuffer buffer = ByteBuffer.allocate(1024);
         // 连接进来了发起一个读操作
